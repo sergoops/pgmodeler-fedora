@@ -1,15 +1,15 @@
 # ReviewRequest: https://bugzilla.redhat.com/show_bug.cgi?id=977116
 
 #global GITrev 8d1e180
-#global prever beta
+%global prever alpha
 
 %global _privatelibs lib(objrenderer|parsers|pgconnector|pgmodeler|pgmodeler_ui|utils)\\.so
 %global __provides_exclude (%{_privatelibs})
 %global __requires_exclude (%{_privatelibs})
 
 Name:             pgmodeler
-Version:          0.8.2
-Release:          4%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Version:          0.9.0
+Release:          0.1%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
@@ -17,7 +17,7 @@ URL:              http://www.pgmodeler.com.br/
 Group:            Applications/Databases
 # Script to generate main source0 for git based builds
 Source1:          %{name}.get.tarball
-Source0:          https://github.com/%{name}/%{name}/archive/v%{version}%{?prever:-%{prever}}.tar.gz#/%{name}-%{version}%{?prever:_%{prever}}%{?GITrev:.git.%{GITrev}}.tar.xz
+Source0:          https://github.com/%{name}/%{name}/archive/v%{version}%{?prever:-%{prever}}.tar.gz#/%{name}-%{version}%{?prever:_%{prever}}%{?GITrev:.git.%{GITrev}}.tar.gz
 Source2:          %{name}.desktop
 Source3:          pgmodeler-mime-dbm.xml
 
@@ -39,7 +39,7 @@ by the user to SQL code and apply them onto database clusters (Version
 9.x).
 
 %prep
-%setup -q -n %{name}-%{version}%{?prever:_%{prever}}
+%setup -q -n %{name}-%{version}%{?prever:-%{prever}}
 
 %build
 # @TODO Due to the bug (https://github.com/pgmodeler/pgmodeler/issues/559) CONFDIR, LANGDIR, SAMPLESDIR, SCHEMASDIR seems ignored?
@@ -114,6 +114,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Sat Dec 10 2016 Pavel Alexeev <Pahan@Hubbitus.info> - 0.9.0-0.1.alpha
+- 0.9.0-alpha release to support postgres 9.6!
+
 * Tue Sep 20 2016 Pavel Alexeev <Pahan@Hubbitus.info> - 0.8.2-4
 - Add Requires shared-mime-info
 - Explicit require single logo file.
