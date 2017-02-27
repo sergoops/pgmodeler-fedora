@@ -1,7 +1,7 @@
 # ReviewRequest: https://bugzilla.redhat.com/show_bug.cgi?id=977116
 
 #global GITrev 8d1e180
-%global prever alpha
+%global prever alpha1
 
 %global _privatelibs lib(objrenderer|parsers|pgconnector|pgmodeler|pgmodeler_ui|utils)\\.so
 %global __provides_exclude (%{_privatelibs})
@@ -9,7 +9,7 @@
 
 Name:             pgmodeler
 Version:          0.9.0
-Release:          0.1%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Release:          0.2%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
@@ -114,6 +114,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Mon Feb 27 2017 Pavel Alexeev <Pahan@Hubbitus.info> - 0.9.0-0.2.alpha1
+- Update to upstream v0.9.0-alpha1.
+
 * Sat Dec 10 2016 Pavel Alexeev <Pahan@Hubbitus.info> - 0.9.0-0.1.alpha
 - 0.9.0-alpha release to support postgres 9.6!
 
