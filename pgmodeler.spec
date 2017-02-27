@@ -115,7 +115,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %changelog
 * Mon Feb 27 2017 Pavel Alexeev <Pahan@Hubbitus.info> - 0.9.0-0.3.alpha1
-- Update to upstream v0.9.0-alpha1.
+- Update to upstream v0.9.0-alpha1
 
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-0.2.alpha
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
