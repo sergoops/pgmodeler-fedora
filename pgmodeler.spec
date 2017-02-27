@@ -20,6 +20,8 @@ Source1:          %{name}.get.tarball
 Source0:          https://github.com/%{name}/%{name}/archive/v%{version}%{?prever:-%{prever}}.tar.gz#/%{name}-%{version}%{?prever:_%{prever}}%{?GITrev:.git.%{GITrev}}.tar.gz
 Source2:          %{name}.desktop
 Source3:          pgmodeler-mime-dbm.xml
+# On old EPEL there no package-config file in postgres packages https://github.com/pgmodeler/pgmodeler/issues/43
+Source4:          libpq.pc
 
 Requires:         hicolor-icon-theme, shared-mime-info
 BuildRequires:    qt5-qtbase-devel, libxml2-devel, postgresql-devel
@@ -42,6 +44,11 @@ by the user to SQL code and apply them onto database clusters (Version
 %setup -q -n %{name}-%{version}%{?prever:-%{prever}}
 
 %build
+%if 0%{?el7}
+cp %{SOURCE4} .
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$(pwd)
+%endif
+
 # @TODO Due to the bug (https://github.com/pgmodeler/pgmodeler/issues/559) CONFDIR, LANGDIR, SAMPLESDIR, SCHEMASDIR seems ignored?
 # SHAREDIR=%%{_sharedstatedir}/%%{name} \
 # CONFDIR=%%{_sysconfdir}/%%{name} \
@@ -53,7 +60,7 @@ by the user to SQL code and apply them onto database clusters (Version
  PRIVATEBINDIR=%{_libexecdir} \
  PLUGINSDIR=%{_libdir}/%{name}/plugins \
  SHAREDIR=%{_datarootdir}/%{name} \
- DOCDIR=%{_docdir}/%{name} \
+ DOCDIR=%{?_pkgdocdir}%{!?_pkgdocdir:%{_docdir}/%{name}-%{version}} \
  PRIVATELIBDIR=%{_libdir}/%{name} \
   %{name}.pro
 
@@ -116,6 +123,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %changelog
 * Mon Feb 27 2017 Pavel Alexeev <Pahan@Hubbitus.info> - 0.9.0-0.3.alpha1
 - Update to upstream v0.9.0-alpha1
+- Add epel7 compatibility - include source4 libpq.pc.
 
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-0.2.alpha
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
