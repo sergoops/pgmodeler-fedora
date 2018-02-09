@@ -9,7 +9,7 @@
 
 Name:             pgmodeler
 Version:          0.9.0
-Release:          0.5%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Release:          0.6%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
@@ -121,6 +121,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-0.6.alpha1
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-0.5.alpha1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
