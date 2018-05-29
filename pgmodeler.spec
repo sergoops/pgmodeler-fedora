@@ -1,19 +1,19 @@
 # ReviewRequest: https://bugzilla.redhat.com/show_bug.cgi?id=977116
 
 #global GITrev 8d1e180
-%global prever alpha1
+#global prever alpha1
 
 %global _privatelibs lib(objrenderer|parsers|pgconnector|pgmodeler|pgmodeler_ui|utils)\\.so
 %global __provides_exclude (%{_privatelibs})
 %global __requires_exclude (%{_privatelibs})
 
 Name:             pgmodeler
-Version:          0.9.0
-Release:          0.6%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Version:          0.9.1
+Release:          1%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
-URL:              http://www.pgmodeler.com.br/
+URL:              http://pgmodeler.io/
 Group:            Applications/Databases
 # Script to generate main source0 for git based builds
 Source1:          %{name}.get.tarball
@@ -121,6 +121,10 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Tue May 29 2018 Pavel Alexeev <Pahan@Hubbitus.info> - 0.9.1-1
+- Release 0.9.1
+- Change official site URL to http://pgmodeler.io/
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-0.6.alpha1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
