@@ -24,7 +24,7 @@ Source3:          pgmodeler-mime-dbm.xml
 Source4:          libpq.pc
 
 Requires:         hicolor-icon-theme, shared-mime-info
-BuildRequires:    qt5-qtbase-devel, libxml2-devel, postgresql-devel
+BuildRequires:    qt5-qtbase-devel, libxml2-devel, libpq-devel
 BuildRequires:    desktop-file-utils, gettext, qt5-qtsvg-devel
 # for convert 300x300 logo file to 256x256
 BuildRequires:    ImageMagick, moreutils
