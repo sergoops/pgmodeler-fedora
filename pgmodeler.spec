@@ -86,25 +86,6 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 
 %find_lang %{name} --with-qt --all-name
 
-# http://fedoraproject.org/wiki/Packaging:ScriptletSnippets#desktop-database
-%post
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-if [ $1 -eq 0 ] ; then
-  gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-  touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-fi
-update-desktop-database &> /dev/null || :
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
-
 %files -f %{name}.lang
 %doc CHANGELOG.md README.md RELEASENOTES.md
 %license LICENSE
