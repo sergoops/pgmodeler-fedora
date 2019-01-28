@@ -14,7 +14,6 @@ Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
 URL:              http://pgmodeler.io/
-Group:            Applications/Databases
 # Script to generate main source0 for git based builds
 Source1:          %{name}.get.tarball
 Source0:          https://github.com/%{name}/%{name}/archive/v%{version}%{?prever:-%{prever}}.tar.gz#/%{name}-%{version}%{?prever:_%{prever}}%{?GITrev:.git.%{GITrev}}.tar.gz
