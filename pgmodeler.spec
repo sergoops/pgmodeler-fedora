@@ -9,7 +9,7 @@
 
 Name:             pgmodeler
 Version:          0.9.1
-Release:          5%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Release:          6%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
@@ -20,11 +20,14 @@ Source0:          https://github.com/%{name}/%{name}/archive/v%{version}%{?preve
 Source2:          %{name}.desktop
 Source3:          pgmodeler-mime-dbm.xml
 # On old EPEL there no package-config file in postgres packages https://github.com/pgmodeler/pgmodeler/issues/43
+%if 0%{?rhel}
 Source4:          libpq.pc
+%endif
 
 Requires:         hicolor-icon-theme, shared-mime-info
 BuildRequires:    qt5-qtbase-devel, libxml2-devel, libpq-devel
 BuildRequires:    desktop-file-utils, gettext, qt5-qtsvg-devel
+BuildRequires:    libXext-devel
 # for convert 300x300 logo file to 256x256
 BuildRequires:    ImageMagick, moreutils
 
@@ -101,6 +104,9 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Wed Apr 01 2020 Jared K. Smith <jsmith@fedoraproject.org> - 0.9.1-6
+- Fix FTBFS by adding missing dependency and conditional for EPEL
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.1-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
