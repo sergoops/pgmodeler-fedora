@@ -9,7 +9,7 @@
 
 Name:             pgmodeler
 Version:          0.9.1
-Release:          6%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Release:          7%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
@@ -104,6 +104,9 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.1-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Wed Apr 01 2020 Jared K. Smith <jsmith@fedoraproject.org> - 0.9.1-6
 - Fix FTBFS by adding missing dependency and conditional for EPEL
 
