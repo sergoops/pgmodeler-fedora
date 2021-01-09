@@ -25,6 +25,7 @@ Source4:          libpq.pc
 %endif
 
 Requires:         hicolor-icon-theme, shared-mime-info
+BuildRequires: make
 BuildRequires:    qt5-qtbase-devel, libxml2-devel, libpq-devel
 BuildRequires:    desktop-file-utils, gettext, qt5-qtsvg-devel
 BuildRequires:    libXext-devel
