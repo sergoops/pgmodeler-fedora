@@ -9,7 +9,7 @@
 
 Name:             pgmodeler
 Version:          0.9.1
-Release:          7%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Release:          8%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
@@ -105,6 +105,9 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.1-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.1-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
