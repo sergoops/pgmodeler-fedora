@@ -9,7 +9,7 @@
 
 Name:             pgmodeler
 Version:          0.9.1
-Release:          9%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Release:          10%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
@@ -105,6 +105,9 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.1-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Mon Feb 08 2021 Pavel Raiskup <praiskup@redhat.com> - 0.9.1-9
 - rebuild for libpq ABI fix rhbz#1908268
 
