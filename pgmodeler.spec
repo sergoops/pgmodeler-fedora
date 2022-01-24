@@ -1,39 +1,35 @@
-# ReviewRequest: https://bugzilla.redhat.com/show_bug.cgi?id=977116
-
-#global GITrev 8d1e180
-#global prever alpha1
-
 %global _privatelibs lib(objrenderer|parsers|pgconnector|pgmodeler|pgmodeler_ui|utils)\\.so
 %global __provides_exclude (%{_privatelibs})
 %global __requires_exclude (%{_privatelibs})
 
 Name:             pgmodeler
-Version:          0.9.1
-Release:          11%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
+Version:          0.9.4
+Release:          1%{?prever:.%{prever}}%{?GITrev:.git.%{GITrev}}%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPLv3
 URL:              http://pgmodeler.io/
 # Script to generate main source0 for git based builds
-Source1:          %{name}.get.tarball
-Source0:          https://github.com/%{name}/%{name}/archive/v%{version}%{?prever:-%{prever}}.tar.gz#/%{name}-%{version}%{?prever:_%{prever}}%{?GITrev:.git.%{GITrev}}.tar.gz
-Source2:          %{name}.desktop
-Source3:          pgmodeler-mime-dbm.xml
-# On old EPEL there no package-config file in postgres packages https://github.com/pgmodeler/pgmodeler/issues/43
-%if 0%{?rhel}
-Source4:          libpq.pc
-%endif
+Source0:          https://github.com/%{name}/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source1:          %{name}.desktop
+Source2:          pgmodeler-mime-dbm.xml
 
-Requires:         hicolor-icon-theme, shared-mime-info
-BuildRequires: make
-BuildRequires:    qt5-qtbase-devel, libxml2-devel, libpq-devel
-BuildRequires:    desktop-file-utils, gettext, qt5-qtsvg-devel
-BuildRequires:    libXext-devel
-# for convert 300x300 logo file to 256x256
-BuildRequires:    ImageMagick, moreutils
+Requires:         hicolor-icon-theme
+Requires:         shared-mime-info
 
-# https://fedoraproject.org/wiki/Packaging:AppData
+BuildRequires:    desktop-file-utils
+BuildRequires:    gettext
 BuildRequires:    libappstream-glib
+BuildRequires:    libpq-devel
+BuildRequires:    libXext-devel
+BuildRequires:    libxml2-devel
+BuildRequires:    make
+BuildRequires:    qt5-qtbase-devel
+BuildRequires:    qt5-qtsvg-devel
+# for convert 300x300 logo file to 256x256
+BuildRequires:    ImageMagick
+BuildRequires:    moreutils
+
 
 %description
 PostgreSQL Database Modeler, or simply, pgModeler is an
@@ -43,14 +39,12 @@ only PostgreSQL implements. The pgModeler translates the models created
 by the user to SQL code and apply them onto database clusters (Version
 9.x).
 
+
 %prep
-%setup -q -n %{name}-%{version}%{?prever:-%{prever}}
+%autosetup -p1 -n %{name}-%{version}
+
 
 %build
-%if 0%{?el7}
-cp %{SOURCE4} .
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$(pwd)
-%endif
 
 # @TODO Due to the bug (https://github.com/pgmodeler/pgmodeler/issues/559) CONFDIR, LANGDIR, SAMPLESDIR, SCHEMASDIR seems ignored?
 # SHAREDIR=%%{_sharedstatedir}/%%{name} \
@@ -65,19 +59,20 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$(pwd)
  SHAREDIR=%{_datarootdir}/%{name} \
  DOCDIR=%{?_pkgdocdir}%{!?_pkgdocdir:%{_docdir}/%{name}-%{version}} \
  PRIVATELIBDIR=%{_libdir}/%{name} \
-  %{name}.pro
+ %{name}.pro
 
 %make_build
+
 
 %install
 %make_install INSTALL_ROOT=%{buildroot}
 
-desktop-file-install --mode 644 --dir %{buildroot}%{_datadir}/applications/ %{SOURCE2}
+desktop-file-install --mode 644 --dir %{buildroot}%{_datadir}/applications/ %{SOURCE1}
 # icon, mime and menu-entry
 convert -resize 256x256 pgmodeler_logo.png - | sponge pgmodeler_logo.png
 install -p -dm 755 %{buildroot}%{_datadir}/icons/hicolor/256x256/apps/ %{buildroot}%{_datadir}/mime/packages/
-install -p -m 644 conf/%{name}_logo.png %{buildroot}%{_datadir}/icons/hicolor/256x256/apps/
-install -p -m 644 %{SOURCE3} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
+install -p -m 644 assets/conf/%{name}_logo.png %{buildroot}%{_datadir}/icons/hicolor/256x256/apps/
+install -p -m 644 %{SOURCE2} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 # https://github.com/pgmodeler/pgmodeler/issues/783
 mkdir -p %{buildroot}%{_libdir}/%{name}/plugins
 
@@ -89,12 +84,14 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 
 %find_lang %{name} --with-qt --all-name
 
+
 %files -f %{name}.lang
 %doc CHANGELOG.md README.md RELEASENOTES.md
 %license LICENSE
 %{_bindir}/%{name}
 %{_bindir}/%{name}-cli
 %{_libexecdir}/%{name}-ch
+%{_libexecdir}/%{name}-se
 # %%{_libdir}/%%{name}/lib*.so are not devel files! All in subdirectory and needs to load plugins only
 %{_libdir}/%{name}
 %{_datarootdir}/%{name}
@@ -104,7 +101,11 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/appdata/%{name}.appdata.xml
 
+
 %changelog
+* Mon Jan 24 2022 Sandro Mani <manisandro@gmail.com> - 0.9.4-1
+- Update to 0.9.4
+
 * Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.1-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
