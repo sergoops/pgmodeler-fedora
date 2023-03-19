@@ -24,8 +24,8 @@ BuildRequires:    libpq-devel
 BuildRequires:    libXext-devel
 BuildRequires:    libxml2-devel
 BuildRequires:    make
-BuildRequires:    qt5-qtbase-devel
-BuildRequires:    qt5-qtsvg-devel
+BuildRequires:    qt6-qtbase-devel
+BuildRequires:    qt6-qtsvg-devel
 # for convert 300x300 logo file to 256x256
 BuildRequires:    ImageMagick
 BuildRequires:    moreutils
@@ -51,7 +51,7 @@ by the user to SQL code and apply them onto database clusters (Version
 # CONFDIR=%%{_sysconfdir}/%%{name} \
 # LANGDIR=%%{_datadir}/locale \
 # SCHEMASDIR=%%{_sysconfdir}/%%{name} \
-%qmake_qt5 \
+%qmake_qt6 \
  PREFIX=%{_prefix} \
  BINDIR=%{_bindir} \
  PRIVATEBINDIR=%{_libexecdir} \
