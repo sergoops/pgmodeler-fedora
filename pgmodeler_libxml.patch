@@ -1,0 +1,12 @@
+diff -rupN pgmodeler-1.0.4/libs/libparsers/src/xmlparser.cpp pgmodeler-1.0.4-new/libs/libparsers/src/xmlparser.cpp
+--- pgmodeler-1.0.4/libs/libparsers/src/xmlparser.cpp	2023-05-20 02:38:31.000000000 +0200
++++ pgmodeler-1.0.4-new/libs/libparsers/src/xmlparser.cpp	2024-01-29 22:36:34.691568877 +0100
+@@ -152,7 +152,7 @@ void XmlParser::readBuffer()
+ {
+ 	QByteArray buffer;
+ 	QString msg, file;
+-	xmlError *xml_error=nullptr;
++	const xmlError *xml_error=nullptr;
+ 	int parser_opt;
+ 
+ 	if(!xml_buffer.isEmpty())
