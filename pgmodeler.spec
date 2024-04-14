@@ -3,8 +3,8 @@
 %global __requires_exclude (%{_privatelibs})
 
 Name:             pgmodeler
-Version:          1.0.4
-Release:          4%{?dist}
+Version:          1.1.2
+Release:          1%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPL-3.0-only
@@ -13,9 +13,6 @@ URL:              http://pgmodeler.io/
 Source0:          https://github.com/%{name}/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:          %{name}.desktop
 Source2:          pgmodeler-mime-dbm.xml
-
-# Fix build against recent libxml2
-Patch0:           pgmodeler_libxml.patch
 
 Requires:         hicolor-icon-theme
 Requires:         shared-mime-info
@@ -104,6 +101,9 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 
 
 %changelog
+* Sun Apr 14 2024 Sandro Mani <manisandro@gmail.com> - 1.1.2-1
+- Update to 1.1.2
+
 * Thu Jan 25 2024 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.4-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
 
