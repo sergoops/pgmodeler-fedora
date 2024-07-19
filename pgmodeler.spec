@@ -4,7 +4,7 @@
 
 Name:             pgmodeler
 Version:          1.1.3
-Release:          1%{?dist}
+Release:          2%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPL-3.0-only
@@ -101,6 +101,9 @@ rm -f %{buildroot}/%{_docdir}/%{name}/LICENSE
 
 
 %changelog
+* Fri Jul 19 2024 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
+
 * Tue May 14 2024 Sandro Mani <manisandro@gmail.com> - 1.1.3-1
 - Update to 1.1.3
 
