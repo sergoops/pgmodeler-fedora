@@ -3,14 +3,14 @@
 %global __requires_exclude (%{_privatelibs})
 
 Name:             pgmodeler
-Version:          1.1.3
-Release:          3%{?dist}
+Version:          1.1.6
+Release:          1%{?dist}
 Summary:          PostgreSQL Database Modeler
 
 License:          GPL-3.0-only
 URL:              http://pgmodeler.io/
 # Script to generate main source0 for git based builds
-Source0:          https://github.com/%{name}/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:          v%{version}.tar.gz
 Source1:          %{name}.desktop
 Source2:          pgmodeler-mime-dbm.xml
 
